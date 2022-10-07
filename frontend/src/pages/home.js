@@ -1,17 +1,20 @@
+import { useState } from "react";
 import AddForm from "../components/AddForm";
+import Questions from "../components/Questions";
+import Memory from "../components/Memory";
 
 const Home = () => {
+    const [showForm, setShowForm] = useState(true)
+
     return (
         <div className="home">
-            <AddForm>
+            {showForm && <AddForm setShowForm={setShowForm} /> }
+            <Questions>
 
-            </AddForm>
-            <div className="questions">
-                <h3> Questions </h3>
-            </div>
-            <div className="memory">
-                <h3> Memory </h3>
-            </div>
+            </Questions>
+            <Memory>
+
+            </Memory>
         </div>
     );
 }

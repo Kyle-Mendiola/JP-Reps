@@ -7,8 +7,8 @@ const Navbar = () => {
                 <h1 className='project-title'> JP-Reps </h1>
             </Link>
             <Link to="/"> Home </Link>
-            <Link to="/"> Word List </Link>
-            <Link to="/"> Kanji </Link>
+            <Link to="/word-list"> Word List </Link>
+            <Link to="/kanji"> Kanji </Link>
         </nav>
     )
 }

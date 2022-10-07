@@ -48,21 +48,27 @@ nav .project-title {
 
 .home {
     display: flex;
+    margin-top: 2em;
 }
 
 .home .questions{
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: var(--f-blue);
-    flex-grow: 4;
+    flex-grow: 5;
+}
+
+.questions button.choice{
+    margin: 0 0.5em;
+    padding: 2em;
 }
 
 .home .memory{
     display: flex;
     flex-direction: column;
     align-items: center;
-    flex-grow: 1;
+    flex-grow: 2;
+    border-left: 3px solid var(--soft-black);
 }
 
 .home .add-form {
@@ -70,6 +76,8 @@ nav .project-title {
     flex-direction: column;
     align-items: center;
     flex-grow: 1;
+    border-right: 3px solid var(--soft-black);
+    position: relative;
 }
 
 .add-form .word-input{
@@ -77,4 +85,22 @@ nav .project-title {
     border-radius: 0.2em;
     font-size: 5em;
     text-align: center;
+}
+
+.add-form label{
+    margin: 10px 0;
+}
+
+.add-form .reading-input{
+    border-radius: 0.2em;
+}
+
+.add-form button.close{
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    width: 30px;
+    height: 30px;
+    border: none;
+    border-radius: 50%;
 }

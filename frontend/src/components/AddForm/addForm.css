@@ -1,0 +1,69 @@
+.add-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-grow: 1;
+    border-right: 3px solid var(--soft-black);
+    border-right: 3px solid gray;
+    position: relative;
+    max-width: 20%;
+}
+
+.add-form div.more-options{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+div.list-displayer-container {
+    display: flex; 
+    max-width: 80%; 
+    margin: 10px 0;
+}
+
+.add-form .word-input{
+    width: 2em;
+    border-radius: 0.2em;
+    font-size: 5em;
+    text-align: center;
+}
+
+.add-form div.addOptions{
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+}
+
+.add-form label{
+    margin: 10px 0;
+}
+
+.add-form .regular-input {
+    border-radius: 0.2em;
+}
+
+.add-form button.close{
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    width: 30px;
+    height: 30px;
+    border: none;
+    border-radius: 50%;
+}
+
+.add-form button.submit{
+    margin-top: 0.5em;
+    padding: 0.7em 0;
+    width: 70%;
+    border-radius: 0.3em;
+    background: var(--f-green);
+    border: 1px solid var(--soft-black);
+}
+
+.add-form textarea{
+    min-width: 50%;
+    min-height: 2em;
+    max-width: 90%;
+    max-height: 20%;
+}

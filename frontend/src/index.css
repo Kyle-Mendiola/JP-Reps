@@ -16,39 +16,15 @@ html, body{
     margin: 0;
 }
 
-nav{
-    display: flex;
-    align-items: flex-end;
-    padding: 0.5em 10%;
-    padding-bottom: 0;
+button:hover:not(button:disabled){
     background: var(--f-green);
-}
-
-nav a{
-    color: var(--soft-black);
-    text-decoration: none;
-    padding: 0 1.2em;
-    padding-bottom: 10px;
-}
-
-nav a:hover:not(nav :first-child){
-    padding-bottom: 5px;
-    border-bottom: 5px solid var(--f-blue);
-}
-
-nav :first-child {
-    margin-right: auto;
-}
-
-nav .project-title {
-    margin: 0;
-    font-size: 2em;
-    text-decoration: none;
+    border-color: var(--soft-black);
 }
 
 .home {
     display: flex;
-    margin-top: 2em;
+    margin-top: 1.5em;
+    min-height: 80vh;
 }
 
 .home .questions{
@@ -68,39 +44,5 @@ nav .project-title {
     flex-direction: column;
     align-items: center;
     flex-grow: 2;
-    border-left: 3px solid var(--soft-black);
-}
-
-.home .add-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    flex-grow: 1;
-    border-right: 3px solid var(--soft-black);
-    position: relative;
-}
-
-.add-form .word-input{
-    width: 2em;
-    border-radius: 0.2em;
-    font-size: 5em;
-    text-align: center;
-}
-
-.add-form label{
-    margin: 10px 0;
-}
-
-.add-form .reading-input{
-    border-radius: 0.2em;
-}
-
-.add-form button.close{
-    position: absolute;
-    top: 5px;
-    right: 10px;
-    width: 30px;
-    height: 30px;
-    border: none;
-    border-radius: 50%;
+    border-left: 3px solid gray;
 }

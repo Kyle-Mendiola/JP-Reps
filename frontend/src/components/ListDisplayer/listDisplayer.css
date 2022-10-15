@@ -1,0 +1,20 @@
+div.list-displayer {
+    display: flex; 
+    flex-wrap: wrap; 
+    align-items: center; 
+}
+
+div.list-displayer p {
+    background: gray;
+    padding: 0.2rem 0.4em;
+    border-radius: 5px;
+    margin: 0.2rem;
+    font-size: 0.7em;
+    cursor: pointer;
+    color: white;
+}
+
+div.list-displayer p:hover {
+    background: var(--f-green);
+    color: var(--soft-black);
+}

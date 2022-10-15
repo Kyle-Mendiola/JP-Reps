@@ -1,0 +1,29 @@
+nav{
+    display: flex;
+    align-items: flex-end;
+    padding: 0.5em 10%;
+    padding-bottom: 0;
+    background: var(--f-green);
+}
+
+nav a{
+    color: var(--soft-black);
+    text-decoration: none;
+    padding: 0 1.2em;
+    padding-bottom: 10px;
+}
+
+nav a:hover:not(nav :first-child){
+    padding-bottom: 5px;
+    border-bottom: 5px solid var(--f-blue);
+}
+
+nav :first-child {
+    margin-right: auto;
+}
+
+nav .project-title {
+    margin: 0;
+    font-size: 2em;
+    text-decoration: none;
+}

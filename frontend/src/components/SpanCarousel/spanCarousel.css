@@ -1,0 +1,38 @@
+div.span-carousel{
+    display: flex; 
+    position: relative;
+    overflow: hidden;
+    max-width: 80%;
+    align-items: center;
+    margin-top: 0.2rem;
+}
+
+div.span-carousel div{
+    display: flex;
+    overflow-x: visible;
+    max-width: 80%;
+}
+
+div.span-carousel button{
+    margin: 0.3em;
+}
+
+div.span-carousel.tag div{
+    scroll-snap-type: x mandatory;
+}
+
+div.span-carousel p{
+    scroll-snap-align: start;
+    background: gray;
+    padding: 0.2rem 0.4em;
+    border-radius: 5px;
+    margin: 0.2rem;
+    font-size: 0.7em;
+    cursor: pointer;
+    color: white;
+}
+
+div.span-carousel p:hover{
+    background: var(--f-green);
+    color: var(--soft-black);
+}

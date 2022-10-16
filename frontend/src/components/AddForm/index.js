@@ -73,7 +73,7 @@ const AddForm = ({ setShowForm }) => {
 
     // Set existing tags on first render (fetch from backend)
     useEffect(() => {
-        setExistingTags(["Tag1", "Tag2", "Tag3"])
+        setExistingTags(["Tag1", "Tag2", "Tag3", "Tag1", "Tag2"])
     }, [])
 
     return (

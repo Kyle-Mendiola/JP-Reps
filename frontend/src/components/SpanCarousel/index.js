@@ -6,17 +6,17 @@
 
 import { useState, useEffect } from "react"
 import "./spanCarousel.css"
+import { scrollInfo } from "../utilities"
 
 
-const SpanCarousel = (props) => {    
+const SpanCarousel = ({ elements, className, pClickEvent }) => {    
     const [showBtns, setShowBtns] = useState(false)
-    const { elements, pClickEvent } = props
-    const className = `span-carousel ${props.className}`
 
     const scroll = (e, config={ direction:"left" }) => {
         e.preventDefault()
 
-        const parentDiv = document.querySelector(`.span-carousel.${props.className} div`)
+        const parentDiv = document.querySelector(`.span-carousel.${className} div`)
+
         let direction
         switch (config.direction) {
             case "left": direction = -1; break;
@@ -24,19 +24,30 @@ const SpanCarousel = (props) => {
             default: direction = -1
         }
 
-        const scrollPx = Math.round(parentDiv.scrollWidth / 3 * 0.5) * direction
-        const scrollCoordinate = parentDiv.scrollLeft + scrollPx
+        const scrollFactor = Math.round(parentDiv.scrollWidth / 3 * 0.5) * direction
+        const scrollCoordinate = parentDiv.scrollLeft + scrollFactor
 
         parentDiv.scroll({
             left: scrollCoordinate,
             behavior: "smooth"
         })
+
+        // Wait for scrolling before disabling buttons
+        setTimeout(() => {
+            const { onStart, onEnd } = scrollInfo(parentDiv, { offset:5 })
+
+            document.querySelector(`.span-carousel.${className} button.left`).disabled = onStart
+            document.querySelector(`.span-carousel.${className} button.right`).disabled = onEnd
+
+        }, 150);
+
     }
 
     useEffect(() => {
-        const parentDiv = document.querySelector(`.span-carousel.${props.className} div`)
+        const parentDiv = document.querySelector(`.span-carousel.${className} div`)
         const parentWidth = parentDiv.parentElement.getBoundingClientRect().width
 
+        // Show buttons when p elements overflow the parent container, else hide
         if(parentDiv.scrollWidth > parentWidth){
             parentDiv.style["overflow-x"] = "hidden"
             setShowBtns(true)
@@ -46,11 +57,12 @@ const SpanCarousel = (props) => {
             setShowBtns(false)
         }
 
-    }, [props.elements, props.className, showBtns])
+    }, [elements, className, showBtns])
 
     return (
         <div
-            className={className}
+            // className={className}
+            className={`span-carousel ${className || ""}`.trim()}
         >
             {showBtns && <button className="left" onClick={(e) => {scroll(e)}}> &#60; </button>}
             <div>

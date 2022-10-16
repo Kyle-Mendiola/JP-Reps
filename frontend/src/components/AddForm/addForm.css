@@ -7,12 +7,14 @@
     border-right: 3px solid gray;
     position: relative;
     max-width: 20%;
+    text-align: center;
 }
 
 .add-form div.more-options{
     display: flex;
     flex-direction: column;
     align-items: center;
+    max-width: 80%;
 }
 
 div.list-displayer-container {
@@ -22,7 +24,7 @@ div.list-displayer-container {
 }
 
 .add-form .word-input{
-    width: 2em;
+    max-width: 80%;
     border-radius: 0.2em;
     font-size: 5em;
     text-align: center;
@@ -39,6 +41,7 @@ div.list-displayer-container {
 }
 
 .add-form .regular-input {
+    max-width: 80%;
     border-radius: 0.2em;
 }
 
@@ -62,8 +65,8 @@ div.list-displayer-container {
 }
 
 .add-form textarea{
-    min-width: 50%;
+    min-width: 100%;
+    max-width: 100%;
     min-height: 2em;
-    max-width: 90%;
     max-height: 20%;
 }

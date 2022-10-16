@@ -24,7 +24,7 @@ button:hover:not(button:disabled){
 .home {
     display: flex;
     margin-top: 1.5em;
-    min-height: 80vh;
+    min-height: 85vh;
 }
 
 .home .questions{

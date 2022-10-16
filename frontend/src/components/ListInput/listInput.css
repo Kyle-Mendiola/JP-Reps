@@ -1,3 +1,9 @@
 div.list-input-wrapper {
     display: flex;
+    max-width: 100%;
+}
+
+/* Prevents the input from overflowing from the parent */
+div.list-input-wrapper input{
+    min-width: 0;
 }

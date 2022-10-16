@@ -3,11 +3,10 @@
     flex-direction: column;
     align-items: center;
     flex-grow: 1;
-    border-right: 3px solid var(--soft-black);
-    border-right: 3px solid gray;
     position: relative;
     max-width: 20%;
     text-align: center;
+    border-right: 3px solid gray;
 }
 
 .add-form div.more-options{
@@ -20,7 +19,7 @@
 div.list-displayer-container {
     display: flex; 
     max-width: 80%; 
-    margin: 10px 0;
+    margin-bottom: 10px;
 }
 
 .add-form .word-input{
@@ -36,7 +35,7 @@ div.list-displayer-container {
     margin: 10px 0;
 }
 
-.add-form label{
+.add-form > label, .more-options > label{
     margin: 10px 0;
 }
 
@@ -69,4 +68,8 @@ div.list-displayer-container {
     max-width: 100%;
     min-height: 2em;
     max-height: 20%;
+}
+
+.add-form select.type-input {
+    margin-left: 0.4em;
 }

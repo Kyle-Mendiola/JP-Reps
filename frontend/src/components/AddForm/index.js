@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import SpanCarousel from "../SpanCarousel"
 import ListInput from "../ListInput"
 import ListDisplayer from "../ListDisplayer"
+import WordGroupModal from "../WordGroupModal"
 import { isEmpty, hasString } from "../utilities"
 import "./addForm.css"
 
@@ -14,8 +15,15 @@ const AddForm = ({ setShowForm }) => {
     const [form, setForm] = useState({
         word: "",
         reading: "",
-        meaning: ""
+        meaning: "",
+        type: "noun"
     })
+    const [isWordGroupModalShown, setIsWordGroupModalShown] = useState(false)
+
+    const modalHandler = (e) => {
+        e.preventDefault()
+        setIsWordGroupModalShown(true)
+    }
 
     const closeHandler = (e) => {
         e.preventDefault()
@@ -50,14 +58,13 @@ const AddForm = ({ setShowForm }) => {
             ...prevState,
             [name]: value
         }));
-
     }
 
     const submitHandler = (e) => {
         e.preventDefault()
-        // if (showMoreOptions) {
-        //     word["tags"] = newTags
-        // }
+        if (showMoreOptions) {
+            form["tags"] = newTags
+        }
         console.table(form);
     }
 
@@ -78,19 +85,25 @@ const AddForm = ({ setShowForm }) => {
 
     return (
         <form className="add-form">
-            <button className="close" onClick={closeHandler}>X</button>
             <h3> Add a new word </h3>
             <input className="word-input" type="text" name="word" onChange={inputsHandler} value={form.word} />
             <label htmlFor="reading"> Reading: </label>
             <input className="regular-input" name="reading" type="text" onChange={inputsHandler} value={form.reading} />
             <label htmlFor="meaning" > Meaning: </label>
             <input className="regular-input" name="meaning" type="text" onChange={inputsHandler} value={form.meaning} />
-            <label htmlFor="type" > Type: </label>
-            <select className="type-input" name="type" type="text">
-                <option value="noun">Noun</option>
-                <option value="verb">Verb</option>
-                <option value="adj">Adjective</option>
-            </select>
+            <label htmlFor="type" > Type: 
+                <select 
+                    className="type-input" 
+                    name="type" 
+                    type="text"
+                    onChange={inputsHandler} 
+                    value={form.type}
+                >
+                    <option value="noun">Noun</option>
+                    <option value="verb">Verb</option>
+                    <option value="adj">Adjective</option>
+                </select>
+            </label>
             <label htmlFor="addOptionsCb"> 
                 More Options: 
                 <input type="checkbox" 
@@ -104,7 +117,7 @@ const AddForm = ({ setShowForm }) => {
 
             {showMoreOptions && 
             <div className="more-options">
-                <label htmlFor="word-group"> Word groups: </label>
+                <label htmlFor="word-group"> Word groups: <button onClick={modalHandler}> + </button> </label>
                 <div className="list-displayer-container tags">
                     <label> Tags: </label>
                     <ListDisplayer
@@ -134,6 +147,8 @@ const AddForm = ({ setShowForm }) => {
                 <textarea className="notes-input" name="notes"/>
             </div>}
             <button className="submit" onClick={submitHandler}> ADD </button>
+            <button className="close" onClick={closeHandler}>X</button>
+            <WordGroupModal isShown={isWordGroupModalShown} setIsShown={setIsWordGroupModalShown} />
         </form>
     )
 }

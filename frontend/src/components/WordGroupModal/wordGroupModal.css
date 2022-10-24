@@ -4,15 +4,119 @@
     position: fixed;
     top: 0;
     left: 0;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.2);
     z-index: 1;
+    color: white;
 }
 
 .word-group-modal div.modal{
-    height: max-content;
-    width: max-content;
-    position: absolute;
+    height: 70%;
+    width: 50%;
+    margin: 0 auto;
+    padding: 0.5em;
+    border-radius: 1em;
+    background: var(--f-blue);
+}
+
+.vertical-centered {
+    position: relative;
     top: 50%;
-    left: 50%;
-    background-color: rgba(0, 0, 0, 0.5);
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.word-group-modal h2{
+    background: var(--f-blue);
+    text-align: left;
+    margin-left: 5%;
+}
+
+.word-group-modal div.modal > button{
+    position: absolute;
+    padding: 1em 1.5em;
+    right: 5%;
+    top: 5%;
+    cursor: pointer;
+    color: white;
+    background-color: brown;
+    border-radius: 0.5em;
+    border: 0;
+}
+
+.word-group-modal ul{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-right: 1em;
+    margin: 0 auto;
+    width: 60%;
+    overflow-y: auto;
+    max-height: 80%;
+}
+
+.word-group-modal ul li{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: large;
+    width: 100%;
+    border-bottom: 1px solid var(--f-brown);
+}
+
+.word-group-modal ul li:hover{
+    background: var(--f-light-blue);
+}
+
+.word-group-modal ul li label{
+    text-align: center;
+    padding: 2em;
+    flex-grow: 1;
+    cursor: pointer;
+    position: relative;
+}
+
+.word-group-modal ul li label.new::after{
+    content: "new";
+    font-size: 0.75em;
+    color: #67221B;
+    justify-self: center;
+    position: absolute;
+    left: 0;
+    top: 0.1em
+}
+
+/* The add word group part */
+.word-group-modal ul li label:last-child{
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+}
+
+.word-group-modal ul li input[type=checkbox]{
+    height: 20px;
+    width: 20px;
+    cursor: pointer;
+}
+
+#style-1::-webkit-scrollbar-track
+{
+	box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	border-radius: 10px;
+	background-color: var(--f-blue);
+}
+
+#style-1::-webkit-scrollbar
+{
+	width: 10px;
+	background-color: var(--f-blue);
+}
+
+#style-1::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+	box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: #555;
 }

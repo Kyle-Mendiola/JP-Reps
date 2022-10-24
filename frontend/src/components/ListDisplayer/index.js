@@ -7,8 +7,9 @@ const ListDisplayer = ({ className, clickHandler, data }) => {
                 <p 
                     key={`${d}${i}`}
                     data-value={d} 
-                    onClick={clickHandler}>{d} x
-                    
+                    onClick={clickHandler}
+                >
+                    {d}
                 </p>
             ))}
         </div>

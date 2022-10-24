@@ -1,0 +1,10 @@
+div.error-input{
+    position: relative;
+    max-width: 80%;
+}
+
+div.error-input input{
+    border-radius: 0.2em;
+    font-size: 5em;
+    text-align: center;
+}

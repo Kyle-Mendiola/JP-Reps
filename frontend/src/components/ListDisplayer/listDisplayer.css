@@ -5,6 +5,7 @@ div.list-displayer {
 }
 
 div.list-displayer p {
+    display: flex;
     background: gray;
     padding: 0.2rem 0.4em;
     border-radius: 5px;
@@ -12,6 +13,11 @@ div.list-displayer p {
     font-size: 0.7em;
     cursor: pointer;
     color: white;
+}
+
+div.list-displayer p::after{
+    content: "  X";
+    padding-left: 5px;
 }
 
 div.list-displayer p:hover {

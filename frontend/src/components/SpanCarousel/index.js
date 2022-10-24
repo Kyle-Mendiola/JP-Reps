@@ -6,7 +6,7 @@
 
 import { useState, useEffect } from "react"
 import "./spanCarousel.css"
-import { scrollInfo } from "../utilities"
+import { scrollInfo } from "../../utilities"
 
 
 const SpanCarousel = ({ elements, className, pClickEvent }) => {    

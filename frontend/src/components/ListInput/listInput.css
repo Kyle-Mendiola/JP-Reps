@@ -1,9 +1,30 @@
 div.list-input-wrapper {
     display: flex;
     max-width: 100%;
+    position: relative;
+}
+
+div.list-input-wrapper div.input {
+    display: flex;
+    max-width: 100%;
+    outline: 1px solid black;
+}
+
+div.list-input-wrapper div.focused {
+    outline: -webkit-focus-ring-color auto 3px;
 }
 
 /* Prevents the input from overflowing from the parent */
 div.list-input-wrapper input{
     min-width: 0;
+    border: 0;
+    padding: 0.2em;
+}
+
+div.list-input-wrapper input:focus {
+    outline: none;
+}
+
+div.list-input-wrapper button{
+    border: 0;
 }

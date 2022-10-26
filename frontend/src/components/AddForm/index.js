@@ -8,24 +8,28 @@ import WordGroupModal from "../WordGroupModal"
 import ErrorInput from "../partials/ErrorInput"
 import "./addForm.css"
 
-// TODO: Revise states so that they are cleaner
+// 
 
 const AddForm = ({ setShowForm }) => {
-    const [existingTags ,setExistingTags] = useState([])
-    const [newTags, setNewTags] = useState([])
-    const [tag, setTag] = useState("")
+    const [form, setForm] = useState({
+        word: { inputValue: "", error: { message: "" }},
+        reading: { inputValue: "", error: { message: "" }},
+        meaning: { inputValue: "", error: { message: "" }},
+        type: { inputValue: "noun", error: { message: "" }},
+    })
 
-    const [tagInputError, setTagInputError] = useState({message: ""})
+    const [tag, setTag] = useState({
+        inputValue: "",
+        existingTags: [],
+        newTags: [],
+        error: { message:""}
+    })
+
     const [wordInputError, setWordInputError] = useState({message: ""})
 
     const [showMoreOptions, setShowMoreOptions] = useState(false)
     const wordGroupsRef = useRef([])
-    const [form, setForm] = useState({
-        word: "",
-        reading: "",
-        meaning: "",
-        type: "noun"
-    })
+
     const [isWordGroupModalShown, setIsWordGroupModalShown] = useState(false)
 
     const modalHandler = (e) => {
@@ -41,67 +45,90 @@ const AddForm = ({ setShowForm }) => {
     const addTagHandler = (e) => {
         e.preventDefault()
 
-        if(isEmpty(tag) || newTags.includes(tag)){
-            setTagInputError(getTagInputError())
+        const error = getTagInputError()
+
+        if(error?.message){
+            tagHandler({ error: error })
             return
         }
 
-        setTagInputError({})
-        setNewTags([...newTags, tag])
-        setTag("")
+        tagHandler({ 
+            newTags: [...tag.newTags, tag.inputValue],
+            inputValue: "",
+            error: {}
+        })
     }
 
     const addSuggestedTagClickHandler = (e) => {
         const newTag = e.target.getAttribute("data-value")
-        setNewTags([...newTags, newTag])
-        setTag("")
+        tagHandler({ 
+            newTags: [...tag.newTags, newTag],
+            inputValue: ""
+        })
     }
 
     const removeTagClickHandler = (e) => {
         const tagToRemove = e.target.getAttribute("data-value")
-        setNewTags(newTags.filter(t => t !== tagToRemove))
+        tagHandler({
+            newTags: tag.newTags.filter(t => t !== tagToRemove)
+        })
     }
 
     const inputsHandler = (e) => {
         const  { name, value } = e.target
+
         setForm(prevState => ({
             ...prevState,
-            [name]: value
+            [name]: { inputValue: value, error: { message: "" }}
         }));
+    }
+
+    const tagHandler = (pairs) => {
+        const oldState = Object.assign({}, tag)
+
+        const newState = Object.assign(oldState, pairs)
+        setTag(newState)
+    }
+
+    const tagInputChangeHandler = (e) => {
+        tagHandler({ 
+            inputValue:e,
+            error: {}
+        })
     }
 
     const submitHandler = (e) => {
         e.preventDefault()
 
-        if(isEmpty(form.word)){
+        if(isEmpty(form.word.inputValue)){
             setWordInputError({ message: "Please input a value"})
             return
         }
 
         if (showMoreOptions) {
-            form["tags"] = newTags
+            form["tags"] = tag.newTags
         }
         console.table(form);
     }
 
     const getTagInputError = () => {
-        if(isEmpty(tag)){
+        if(isEmpty(tag.inputValue)){
             return { message: "Please input a value." }
         }
-        else if(newTags.includes(tag)){
+        else if(tag.newTags.includes(tag.inputValue)){
             return { message: "This tag is already included."}
         }
+
         return {}
     }
     
     // Set existing tags on first render (fetch from backend)
     useEffect(() => {
-        setExistingTags(["Tag1", "Tag2", "Tag3", "Tag4", "Tag5"])
+        setTag(prevState => ({
+            ...prevState,
+            existingTags: ["Tag1", "Tag2", "Tag3", "Tag4", "Tag5"]
+        }))
     }, [])
-
-    useEffect(() => {
-        setTagInputError({})
-    }, [tag])
 
     useEffect(() => {
         setWordInputError({})
@@ -111,7 +138,6 @@ const AddForm = ({ setShowForm }) => {
     return (
         <form className="add-form">
             <h3> Add a new word </h3>
-            {/* <input className="word-input" type="text" name="word" onChange={inputsHandler} value={form.word} /> */}
             <ErrorInput 
                 el={{ 
                     type:"input", 
@@ -120,22 +146,47 @@ const AddForm = ({ setShowForm }) => {
                         type:"text", 
                         name:"word", 
                         onChange:inputsHandler, 
-                        value:form.word
+                        defaultValue:form.word.inputValue
+                        // value:form.word.inputValue
                     }}
                 }
                 error={wordInputError}
             />
             <label htmlFor="reading"> Reading: </label>
-            <input className="regular-input" name="reading" type="text" onChange={inputsHandler} value={form.reading} />
+            <ErrorInput 
+                el={{
+                    type: "input",
+                    props: {
+                        className:"regular-input", 
+                        name:"reading", 
+                        type:"text",
+                        onChange:inputsHandler, 
+                        value:form.reading.inputValue
+                    }
+                }}
+                error={form.reading.error}  
+            />
             <label htmlFor="meaning" > Meaning: </label>
-            <input className="regular-input" name="meaning" type="text" onChange={inputsHandler} value={form.meaning} />
+            <ErrorInput 
+                el={{
+                    type: "input",
+                    props: {
+                        className:"regular-input", 
+                        name:"meaning", 
+                        type:"text",
+                        onChange:inputsHandler, 
+                        value:form.meaning.inputValue
+                    }
+                }}
+                error={form.meaning.error}  
+            />
             <label htmlFor="type" > Type: 
                 <select 
                     className="type-input" 
                     name="type" 
                     type="text"
                     onChange={inputsHandler} 
-                    value={form.type}
+                    value={form.type.inputValue}
                 >
                     <option value="noun">Noun</option>
                     <option value="verb">Verb</option>
@@ -161,24 +212,23 @@ const AddForm = ({ setShowForm }) => {
                     <ListDisplayer
                         className="tags"
                         clickHandler={removeTagClickHandler}
-                        data={newTags}
+                        data={tag.newTags}
                     />
                 </div>
                 <ListInput
                     inputConfig={{
-                        data:tag,
-                        setData: setTag,
+                        data:tag.inputValue,
+                        setData: tagInputChangeHandler,
                         placeholder: "Add new tag here",
                     }}
                     btnConfig={{
                         onClick:addTagHandler,
-                        // disabled:tagInputInvalid
                     }}
                     className="tag"
-                    error={tagInputError}
+                    error={tag.error}
                 />
                 <SpanCarousel
-                    elements={existingTags.filter((t) => hasString(t, tag) && !newTags.includes(t))}
+                    elements={tag.existingTags.filter((t) => hasString(t, tag.inputValue) && !tag.newTags.includes(t))}
                     className="tag"
                     pClickEvent={addSuggestedTagClickHandler}
                 />

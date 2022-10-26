@@ -9,6 +9,17 @@
     border-right: 3px solid gray;
 }
 
+.add-form div.error-input{
+    position: relative;
+    max-width: 80%;
+}
+
+.add-form div.error-input input.word-input{
+    border-radius: 0.2em;
+    font-size: 5em;
+    text-align: center;
+}
+
 .add-form div.more-options{
     display: flex;
     flex-direction: column;
@@ -18,13 +29,12 @@
 
 div.list-displayer-container {
     display: flex; 
-    /* max-width: 80%;  */
     max-width: 100%; 
     margin-bottom: 10px;
 }
 
 .add-form .word-input{
-    max-width: 80%;
+    width: 100%;
     border-radius: 0.2em;
     font-size: 5em;
     text-align: center;
@@ -41,7 +51,6 @@ div.list-displayer-container {
 }
 
 .add-form .regular-input {
-    max-width: 80%;
     border-radius: 0.2em;
 }
 

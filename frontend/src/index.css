@@ -4,6 +4,7 @@
     --f-light-blue: rgb(89, 135, 168);
     --f-green: rgb(135, 223, 185);
     --f-brown: rgb(219, 223, 210);
+    --error: rgb(216, 114, 114);
 }
 
 *{

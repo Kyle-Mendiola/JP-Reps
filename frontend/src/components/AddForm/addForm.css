@@ -51,6 +51,7 @@ div.list-displayer-container {
 }
 
 .add-form .regular-input {
+    width: 100%;
     border-radius: 0.2em;
 }
 

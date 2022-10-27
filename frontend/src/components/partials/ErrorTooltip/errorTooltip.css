@@ -5,32 +5,19 @@ div.errTooltip{
     width: 100%;
     position: absolute;
     top: 100%;
-    color: rgb(216, 114, 114);
+    color: var(--error);
     z-index: 1;
     border-radius: 0.2em;
-    border: 1px solid rgb(216, 114, 114);
+    border: 1px solid var(--error);
     font-size: 0.9em;
 }
-/* div.list-input-wrapper .errTooltip{
-    background-color: white;
-    padding: 0.2em;
-    margin-top: 9px;
-    width: 100%;
-    position: absolute;
-    top: 100%;
-    color: rgb(216, 114, 114);
-    z-index: 1;
-    border-radius: 0.2em;
-    border: 1px solid rgb(216, 114, 114);
-    font-size: 0.9em;
-} */
 
 div.arrow-up{
     width: 0; 
     height: 0; 
     border-left: 9px solid transparent;
     border-right: 9px solid transparent;
-    border-bottom: 9px solid rgb(216, 114, 114);
+    border-bottom: 9px solid var(--error);
     position: absolute;
     bottom: 100%;
 }

@@ -6,7 +6,14 @@ import "./errorInput.css"
 
 // Note: Call Element in function form (Line 13) to prevent rerendering of this component
 const ErrorInput = ({el, error}) => {
-    const Element = () => React.createElement(el.type, {...el.props})
+
+
+    const Element = () => React.createElement(el.type, 
+        {
+            ...el.props,
+            style: { borderColor: error.message ? "rgb(216, 114, 114)" : "black"}
+        }
+    )
 
     return (
         <div className="error-input"> 

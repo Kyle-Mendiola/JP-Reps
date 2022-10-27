@@ -1,5 +1,19 @@
-export function isEmpty(string) {
-    return string.trim().length <= 0
+// Checks if item has length of zero
+// item : object/array/string
+export function isEmpty(item) {
+    if (isObject(item)) {
+        return Object.keys(item).length <= 0
+    }
+
+    else if(typeof(item) === "string"){
+        return item.trim().length <= 0
+    }
+
+    throw new Error("Invalid argument type")
+}
+
+export function isObject(obj) {
+    return obj === Object(obj);
 }
 
 // Checks if str contains substr (Case insensitive)

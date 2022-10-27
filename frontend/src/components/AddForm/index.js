@@ -22,10 +22,8 @@ const AddForm = ({ setShowForm }) => {
         inputValue: "",
         existingTags: [],
         newTags: [],
-        error: { message:""}
+        error: { message:"" }
     })
-
-    const [wordInputError, setWordInputError] = useState({message: ""})
 
     const [showMoreOptions, setShowMoreOptions] = useState(false)
     const wordGroupsRef = useRef([])
@@ -59,6 +57,40 @@ const AddForm = ({ setShowForm }) => {
         })
     }
 
+    const getValidationErrors = () => {
+        const errorList = []
+
+        // Check no input is entered
+        for (const key in form) {
+            if (!form.hasOwnProperty(key)) {
+                continue
+            }
+            if (isEmpty(form[key].inputValue)) {
+                errorList[key] = { message: "Please input a value" }
+            }
+        }
+
+        return errorList
+    }
+
+    const setValidationErrors = (errors) => {
+        const newStates = {}
+
+        for (const key in errors) {
+            if (errors.hasOwnProperty(key)) {
+                newStates[key] = { 
+                    inputValue: form[key].inputValue, 
+                    error: errors[key]
+                }
+            }
+        }
+
+        setForm(prevState => ({
+            ...prevState,
+            ...newStates
+        }))
+    }
+
     const addSuggestedTagClickHandler = (e) => {
         const newTag = e.target.getAttribute("data-value")
         tagHandler({ 
@@ -76,7 +108,6 @@ const AddForm = ({ setShowForm }) => {
 
     const inputsHandler = (e) => {
         const  { name, value } = e.target
-
         setForm(prevState => ({
             ...prevState,
             [name]: { inputValue: value, error: { message: "" }}
@@ -100,8 +131,10 @@ const AddForm = ({ setShowForm }) => {
     const submitHandler = (e) => {
         e.preventDefault()
 
-        if(isEmpty(form.word.inputValue)){
-            setWordInputError({ message: "Please input a value"})
+        const errors = getValidationErrors()
+
+        if (!isEmpty(errors)) {
+            setValidationErrors(errors)
             return
         }
 
@@ -130,11 +163,6 @@ const AddForm = ({ setShowForm }) => {
         }))
     }, [])
 
-    useEffect(() => {
-        setWordInputError({})
-    }, [form])
-
-
     return (
         <form className="add-form">
             <h3> Add a new word </h3>
@@ -147,10 +175,9 @@ const AddForm = ({ setShowForm }) => {
                         name:"word", 
                         onChange:inputsHandler, 
                         defaultValue:form.word.inputValue
-                        // value:form.word.inputValue
-                    }}
-                }
-                error={wordInputError}
+                    }
+                }}
+                error={form.word.error}
             />
             <label htmlFor="reading"> Reading: </label>
             <ErrorInput 
